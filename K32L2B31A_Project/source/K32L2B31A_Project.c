@@ -13,14 +13,23 @@
 #include "clock_config.h"
 #include "K32L2B31A.h"
 #include "fsl_debug_console.h"
+#include"led.h"
 /* TODO: insert other include files here. */
 
 /* TODO: insert other definitions and declarations here. */
 unsigned int test_global_var=100;
 float dato_float=3.1416;
 /*
- * @brief   Application entry point.
+ * @brief   genera bloqueo de micro por tiempo fijo
  */
+void delay_block(void){
+
+	uint32_t i;
+	for(i=0;i<0xfffff;i++){
+
+	}
+}
+
 int main(void) {
 
     /* Init board hardware. */
@@ -35,6 +44,7 @@ int main(void) {
     PRINTF("Hello World\r\n");
     PRINTF("test_global_var: %d\r\n",test_global_var);
     PRINTF("dato_float: %g\r\n",dato_float);
+    encender_led_verde();
 
     /* Force the counter to be placed into memory. */
     volatile static int i = 0 ;
@@ -42,6 +52,11 @@ int main(void) {
     while(1) {
         i++ ;
         printf("i:%u\r\n",i);
+        encender_led_verde();
+        delay_block();
+        apagar_led_verde();
+        delay_block();
+
         /* 'Dummy' NOP to allow source level single stepping of
             tight while() loop */
         __asm volatile ("nop");
