@@ -15,21 +15,15 @@
 #include "fsl_debug_console.h"
 #include"led.h"
 #include "sensor_de_luz.h"
+#include "irq_lptmr0.h"
+#include "botones.h"
 /* TODO: insert other include files here. */
 
 /* TODO: insert other definitions and declarations here. */
 unsigned int test_global_var=100;
 float dato_float=3.1416;
-/*
- * @brief   genera bloqueo de micro por tiempo fijo
- */
-void delay_block(void){
 
-	uint32_t i;
-	for(i=0;i<0xfffff;i++){
 
-	}
-}
 
 int main(void) {
 
@@ -45,37 +39,32 @@ int main(void) {
     PRINTF("Hello World\r\n");
     PRINTF("test_global_var: %d\r\n",test_global_var);
     PRINTF("dato_float: %g\r\n",dato_float);
-    encender_led_verde();
+
+    LPTMR_StartTimer(LPTMR0);
 
     /* Force the counter to be placed into memory. */
     volatile static int i = 0 ;
-    unsigned char cont_LR = 0;
+    bool boton1,boton2;
+
     uint32_t adc_sensor_de_luz;
     /* Enter an infinite loop, just incrementing a counter. */
     while(1) {
+
+    if (lptmr0_irq_counter !=0){
+    	toggle_led_rojo();
+    	lptmr0_irq_counter=0;
+
         i++ ;
         printf("i:%u\r\n",i);
-        encender_led_verde();
-        delay_block();
-        apagar_led_verde();
-        delay_block();
-        if (i % 10 == 0){
-                	cont_LR++;
-                	if (cont_LR % 2 == 0){
-                		apagar_led_rojo();
-                	}
-                	else{
-                		encender_led_rojo();
-                	}
-                }
-        sensorDeLuzIniciarCaptura();
-        sensorDeLuzEsperarResultado();
+
         adc_sensor_de_luz=sensorDeLuzObtenerDatosADC();
         printf("adc_sensor_de_luz:%u\r\n",adc_sensor_de_luz);
+        boton1=boton1leerEstado();
+        boton2=boton2leerEstado();
+        printf("boton1:%u\r\n",boton1);
+        printf("boton2:%u\r\n",boton2);
 
-        /* 'Dummy' NOP to allow source level single stepping of
-            tight while() loop */
-        __asm volatile ("nop");
+    }
     }
     return 0 ;
 }
