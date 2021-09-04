@@ -1,16 +1,15 @@
-/*! @file : led.c
- * @author  ruben cardoza ramos
+/*! @file : botones.c
+ * @author  Ernesto Andres Rincon Cruz
  * @version 1.0.0
- * @date    2/09/2021
- * @brief   Driver para controlar leds de tarjeta FDRM-K32L2B3
+ * @date    4/09/2021
+ * @brief   Driver para 
  * @details
  *
 */
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "led.h"
-#include "fsl_gpio.h"
+#include"botones.h"
 
 /*******************************************************************************
  * Definitions
@@ -40,23 +39,25 @@
 /*******************************************************************************
  * Public Source Code
  ******************************************************************************/
- void encender_led_verde(){
-	 //encender leds verde
-	 GPIO_PinWrite(GPIOD,5,0);
+ bool boton1leerEstado(){
+	uint32_t valor_pin;
+	bool resultado;
+	valor_pin= GPIO_PinRead(GPIOC,3);
+	 if(valor_pin!=0)
+		 resultado=true;
+	    else
+		      resultado=false;
+	 return (resultado);
+
+	 }
+
+ bool boton2leerEstado(){
+	 uint32_t valor_pin;
+	 bool resultado;
+	 valor_pin= GPIO_PinRead(GPIOA,4);
+	 	 if(valor_pin!=0)
+	 		 resultado=true;
+	 	     else
+	 		     resultado=false;
+	 	return (resultado);
  }
- 
-void apagar_led_verde(){
-	//apagar leds verde
-	 GPIO_PinWrite(GPIOD,5,1);
-}
-void encender_led_rojo(){
-	 //encender led rojo
-	 GPIO_PinWrite(GPIOE,31,0);
- }
-void apagar_led_rojo(){
-	 //apagar led rojo
-	 GPIO_PinWrite(GPIOE,31,1);
- }
-void toggle_led_rojo(){
-	GPIO_PortToggle(GPIOE, 1U<<31);
-}

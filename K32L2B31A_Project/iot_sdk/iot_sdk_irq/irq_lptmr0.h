@@ -1,24 +1,24 @@
-/*! @file : led.h
- * @author ruben cardoza ramos
+/*! @file : irq_lptmr0.h
+ * @author  Ernesto Andres Rincon Cruz
  * @version 1.0.0
- * @date    2/09/2021
- * @brief   Driver para controlar leds de tarjeta FDRM-K32L2B3
+ * @date    4/09/2021
+ * @brief   Driver para 
  * @details
  *
  */
-#ifndef IOT_SDK_PERIPHERAL_LED_H_
-#define IOT_SDK_PERIPHERAL_LED_H_
+#ifndef IOT_SDK_IRQ_IRQ_LPTMR0_H_
+#define IOT_SDK_IRQ_IRQ_LPTMR0_H_
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-
+#include"peripherals.h"
 
 /*!
- * @addtogroup PERIPHERAL
+ * @addtogroup IRQ
  * @{
  */
 /*!
- * @addtogroup LEDS
+ * @addtogroup LPRMR0
  * @{
  */
 /*******************************************************************************
@@ -32,35 +32,12 @@
 /*******************************************************************************
  * Public vars
  ******************************************************************************/
-
+extern volatile uint32_t lptmr0_irq_counter;
 /*******************************************************************************
  * Public Prototypes
  ******************************************************************************/
-/*!
- * @brief enciende led verde de la tarjeta FRDM-K32L2B3
- *
- */
-void encender_led_verde();
-/*!
- * @brief APAGA led verde de la tarjeta FRDM-K32L2B3
- *
- */
-void apagar_led_verde();
-/*!
- * @brief enciende led rojo de la tarjeta FRDM-K32L2B3
- *
- */
 
-void encender_led_rojo();
-/*!
- * @brief apaga led rojo de la tarjeta FRDM-K32L2B3
- *
- */
-void apagar_led_rojo();
+/** @} */ // end of X LPTMR0
+/** @} */ // end of X IRQ
 
-void toggle_led_rojo();
-
-/** @} */ // end of X LEDS
-/** @} */ // end of X PERIPHERAL
-
-#endif /* IOT_SDK_PERIPHERAL_LED_H_ */
+#endif /* IOT_SDK_IRQ_IRQ_LPTMR0_H_ */
