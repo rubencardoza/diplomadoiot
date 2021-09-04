@@ -14,6 +14,7 @@
 #include "K32L2B31A.h"
 #include "fsl_debug_console.h"
 #include"led.h"
+#include "sensor_de_luz.h"
 /* TODO: insert other include files here. */
 
 /* TODO: insert other definitions and declarations here. */
@@ -49,6 +50,7 @@ int main(void) {
     /* Force the counter to be placed into memory. */
     volatile static int i = 0 ;
     unsigned char cont_LR = 0;
+    uint32_t adc_sensor_de_luz;
     /* Enter an infinite loop, just incrementing a counter. */
     while(1) {
         i++ ;
@@ -66,6 +68,10 @@ int main(void) {
                 		encender_led_rojo();
                 	}
                 }
+        sensorDeLuzIniciarCaptura();
+        sensorDeLuzEsperarResultado();
+        adc_sensor_de_luz=sensorDeLuzObtenerDatosADC();
+        printf("adc_sensor_de_luz:%u\r\n",adc_sensor_de_luz);
 
         /* 'Dummy' NOP to allow source level single stepping of
             tight while() loop */
