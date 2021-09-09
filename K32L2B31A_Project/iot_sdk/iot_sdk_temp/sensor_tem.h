@@ -1,30 +1,32 @@
-/*! @file : irq_lptmr0.h
+/*! @file : sensor_tem.h
  * @author  Ernesto Andres Rincon Cruz
  * @version 1.0.0
- * @date    4/09/2021
+ * @date    7/09/2021
  * @brief   Driver para 
  * @details
  *
  */
-#ifndef IOT_SDK_IRQ_IRQ_LPTMR0_H_
-#define IOT_SDK_IRQ_IRQ_LPTMR0_H_
+#ifndef IOT_SDK_TEMP_SENSOR_TEM_H_
+#define IOT_SDK_TEMP_SENSOR_TEM_H_
 /*******************************************************************************
  * Includes
  ******************************************************************************/
 #include"peripherals.h"
 
 /*!
- * @addtogroup IRQ
+ * @addtogroup X
  * @{
  */
 /*!
- * @addtogroup LPRMR0
+ * @addtogroup X
  * @{
  */
 /*******************************************************************************
  * Public Definitions
  ******************************************************************************/
-
+#define SENSOR_DE_temperatura_ADC16_BASE          ADC0
+#define SENSOR_DE_temperatura_ADC16_CHANNEL_GROUP 0U
+#define SENSOR_DE_temperatura_ADC16_USER_CHANNEL  26U /* PTE22, ADC0_SE3 */
 /*******************************************************************************
  * External vars
  ******************************************************************************/
@@ -32,15 +34,14 @@
 /*******************************************************************************
  * Public vars
  ******************************************************************************/
-extern volatile uint32_t lptmr0_irq_counter;
-extern volatile uint32_t led_rojo_irq_counter;
-extern volatile uint32_t boton1_presionado;
-extern volatile uint32_t boton2_presionado;
+
 /*******************************************************************************
  * Public Prototypes
  ******************************************************************************/
+void sensorDetemperaturaIniciarCaptura(void);
+ void sensorDetemperaturaEsperarResultado(void);
+ float SensorDetemperaturaObtenerDatosADC(void);
+/** @} */ // end of X group
+/** @} */ // end of X group
 
-/** @} */ // end of X LPTMR0
-/** @} */ // end of X IRQ
-
-#endif /* IOT_SDK_IRQ_IRQ_LPTMR0_H_ */
+#endif /* IOT_SDK_TEMP_SENSOR_TEM_H_ */
