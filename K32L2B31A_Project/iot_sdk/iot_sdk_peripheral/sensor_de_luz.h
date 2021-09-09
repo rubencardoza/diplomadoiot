@@ -42,7 +42,7 @@
 
 void sensorDeLuzIniciarCaptura(void);
  void sensorDeLuzEsperarResultado(void);
- uint32_t sensorDeLuzObtenerDatosADC(void);
+ float sensorDeLuzObtenerDatosADC(void);
 
 /** @} */ // end of X group
 /** @} */ // end of X group

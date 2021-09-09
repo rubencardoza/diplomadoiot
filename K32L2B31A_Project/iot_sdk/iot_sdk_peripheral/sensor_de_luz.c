@@ -51,12 +51,13 @@ void sensorDeLuzIniciarCaptura(void);
  * Public Source Code
  ******************************************************************************/
 
- uint32_t sensorDeLuzObtenerDatosADC(){
-	 uint32_t resultadoADC;
+ float sensorDeLuzObtenerDatosADC(){
+	 float resultadoADC;
 
 	 sensorDeLuzIniciarCaptura();
 	         sensorDeLuzEsperarResultado();
 	 resultadoADC=ADC16_GetChannelConversionValue(SENSOR_DE_LUZ_ADC16_BASE, SENSOR_DE_LUZ_ADC16_CHANNEL_GROUP);
+	 resultadoADC= (2*(3.3-(3.3/resultadoADC)))*100;
 	 return(resultadoADC);
  }
  
